@@ -1,11 +1,25 @@
 import styles from './Input.module.css'
-const Input = (props) => {
+import React, { useRef, useImperativeHandle } from 'react'
+const Input = React.forwardRef((props, ref) => {
+    const inputRef = useRef() ////inputRef.current.focus()
+
+    const activate = () => {
+        inputRef.current.focus()
+    }
+
+    useImperativeHandle(ref, () => {
+        //return an object with all the data we use from outside
+        return {
+            focus: activate
+        }
+    })
+
     return (
         <div
-            //div wraps email input (.control.invalid > input {})
             className={`${styles.control} ${props.isValid === false ? styles.invalid : ''}`}>
             <label htmlFor={props.id}>{props.label}</label>
             <input
+                ref={inputRef}
                 type={props.type}
                 id={props.id}
                 value={props.value}
@@ -14,6 +28,6 @@ const Input = (props) => {
             />
         </div>
     )
-}
+})
 
 export default Input
