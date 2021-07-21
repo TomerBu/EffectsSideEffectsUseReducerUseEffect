@@ -3,6 +3,7 @@ import AuthContext from '../store/auth-context';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
+  //accepts the value returned from react getContext (in the store)
   const ctx = useContext(AuthContext)
   return (
     <nav className={styles.nav}>
